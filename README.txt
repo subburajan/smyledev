@@ -1,10 +1,17 @@
 
+<h1>Application Developer</h1>
+
+
 Release Smyledev-1.0 
 
 Author: Subburajan Mayilandan
 
 An easy way to build your application on Node JS - Mongo DB, Configurable solutions, web console, You can create Multiple User Roles, Create New Tables, Add authorization to field level, Create pages, Customize UI.
 
+
+Dependencies:
+
+Node, Npm, Install Grunt Latest.
 
 
 Mongo Database configuration 
