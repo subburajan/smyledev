@@ -1,18 +1,29 @@
 
 Application Developer
---------------------------
+========================
 
 Release Smyledev-1.0 
-
 Author: Subburajan Mayilandan
 
 An easy way to build your application on Node JS - Mongo DB, Configurable solutions, web console, You can create Multiple User Roles, Create New Tables, Add authorization to field level, Create pages, Customize UI.
 
 
-Dependencies:
+Dependencies
+=============
 
-Node, Npm, Install Grunt Latest.
+Nodejs, Mongodb 
 
+
+
+Install
+=========
+
+npm install
+npm install -g grunt
+
+
+Use
+=====
 
 Mongo Database configuration 
 ------------------------------------
@@ -49,12 +60,13 @@ Run:
 npm start
 
 
-Open Browser:
+Open Browser and open page
 
-http://localhost:5001/login
+http://localhost:5001/
 
+go to login page and login as developer user
 
-Login as Developer user:
+Default user
 
 user name: developer@smyle.com
 password: !N0password1
