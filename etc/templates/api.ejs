@@ -1,0 +1,260 @@
+
+<%
+	var roleDir = "";
+	if(!args.isTablePage) {
+		roleDir = "/.."
+	}
+%>
+
+var FWK = "../../../..<%=roleDir%>/fwk/server";
+
+var Constants = require(FWK + "/../../etc/Constants");
+
+function buildEnumFields(enumFields) {
+	if(!enumFields) {
+		return {};
+	}
+	var E = Constants.Enums;
+	var map = {};
+	for(var k in enumFields) {
+		map[k] = E[enumFields[k]];
+	}
+	return map;
+}
+
+var fs = require("fs");
+
+var OV = { };
+if(fs.existsSync(__dirname + "/api_ext.js")) {
+	OV = require(__dirname + "/api_ext.js");
+}
+
+module.exports = function(app) {
+
+	var obj = require(FWK + "/api/_API")(app, {
+		id: "<%=args.id%>",
+		page_title: "<%=args.title%>",
+		cascade: true,
+	<% 	
+		var _opt = args.table._opt;
+		if(_opt && _opt.length > 0) {
+			var opt1 = [];
+			_opt.forEach(function(opt) {
+				opt1.push(opt.id);
+			});
+	
+	%>	optText: "<%=opt1.join(" ")%> ",
+
+	<%
+		}
+				
+		var _ref = false, srch = [];
+		
+		args.table.fields.forEach(function(field) {
+			if(field.ui_jq_search != null) {
+				srch.push(field);
+			}	
+			if(!field._ref && (!field.childs || field.childs.length == 0)) {
+				return; 
+			}
+			if(!_ref) {
+				_ref = true;
+	%>	populate: [
+	<%		}
+			
+			if(field._ref) { %>
+			
+			{ path: "<%=field.id%>", select: "<%=field.ui_jq_pop_sel.join(" ")%>" },
+	<%		
+			}
+
+			if(field.childs && field.childs.length > 0) {
+				field.childs.forEach(function(child) {
+					if(!child._ref) {
+						return;
+					}
+					if(!_ref) {
+						_ref = true;
+	%>	populate: [
+	<%				}	%>
+			{ path: "<%=field.id%>.<%=child.id%>", select: "<%=child.ui_jq_pop_sel.join(" ")%>" },
+	<%		
+				});
+			}
+		});
+
+		if(_ref) {
+
+	%>	],	<% 
+
+		}	%>
+		
+		jqtable: {
+		
+	<%	
+		var sel = [];
+		args.jq_fields.forEach(function(field) {
+			sel.push(field.id);
+		});
+		if(srch.length > 0) {
+	%>		where: function(query) {
+				var args = {};
+	<%		srch.forEach(function(field) {	%>
+				if(query.<%=field.id%>) {
+					args.<%=field.id%> = 
+	<%				if(field.ui_jq_search.value == 1) {
+	%>					query.<%=field.id%>;
+	<%				} else if(field.ui_jq_search.value == 2) {
+	%>					{ $regex: new RegExp(".*" + query.<%=field.id%> + ".*", "i") };
+	<%				} else if(field.ui_jq_search.value == 3) {
+	%>					{ $in: [ query.<%=field.id%> ] };
+	<%				}	%>
+				}
+	<%		});	%>
+				return args;
+			},
+	<%	}
+			
+			var sel1 = sel.join(" ");
+			if(args.table._seq) {
+				sel1 = "snum " + sel1;
+			}
+			
+	%>
+			fields: "<%=sel1%>"
+	  	},
+
+<%
+		var dj_sets = args.det_jq_sets;
+		if(dj_sets && dj_sets.length > 0) {
+	
+%>
+	  	projections: {
+<%		
+			dj_sets.forEach(function(set) {
+				
+%>			
+			<%=set.id_field.id%>: { 
+				jq: {
+<%				
+				var jq = [];
+				set.jq_fields.forEach(function(child) {
+					jq.push(child.id);
+				});
+				jq = jq.join(" ");
+				
+%>					fields: "<%=jq%>"
+				},
+				composite: { uniqueField: "<%=set.unique.id%>" },
+
+	  			title: "<%=set.title%>"
+	  		},
+<%			
+			});
+%>
+	  	},
+<%
+		}
+%>  	
+
+		enumFields: buildEnumFields(<%-JSON.stringify(args.table._enumFields)%>),
+
+		controller: "<%=args.table.name%>",
+		
+		auth: {
+<%		
+		var writer = [];
+		args.table.writer.forEach(function(w) {
+			writer.push(w.name.toUpperCase());
+		});	
+		
+		var reader = [];
+		args.table.reader.forEach(function(r) {
+			reader.push(r.name.toUpperCase());
+		});
+
+		var creator = [];
+		args.table.creator.forEach(function(r) {
+			creator.push(r.name.toUpperCase());
+		});
+
+%>			write: [ "<%-writer.join("\",\"")%>" ],
+
+			read: [ "<%-reader.join("\",\"")%>" ],
+			
+			create: [ "<%-creator.join("\",\"")%>" ]
+		},
+		
+		writeOwner: <%=args.table.writeOwner == true%>,
+		readOwner: <%=args.table.readOwner == true%>,
+		
+<%	if(args.roletable) { 
+		var rt = args.roletable;
+%>
+		role_access: {
+<%
+
+		for(var k in rt) {
+			var val = rt[k];
+%>			<%=k%>: {
+				field: "<%=val[0]%>",
+<%			if(val[1]) {	%>
+				foreign: "<%=val[1]%>",
+				model: "<%=val[2]%>"
+<%			}	%>
+			},
+<%		}	%>
+		
+		},
+		
+<%	}
+
+		var pers_ro = args.table._pers_ro;
+
+%>		read_only: {
+<%		
+		for(var k in pers_ro) {
+%>			<%=k%>: [ "<%-pers_ro[k].join("\",\"")%>" ],
+
+<%		}
+%>
+		},
+
+<%	
+		var pers_hidden = args.table._pers_hidden;
+
+%>		hidden: {
+<%		
+		for(var k in pers_hidden) {
+%>			<%=k%>: [ "<%-pers_hidden[k].join("\",\"")%>" ],
+
+<%		}
+%>
+		},
+	
+		immutable: <%
+		var imm = args.table._immutable;
+		if(imm.length == 0) {
+%>[],<%	
+		} else {
+
+%>[ "<%-imm.join("\",\"")%>" ],
+
+<%		}	%>
+
+		<% 	if(args.index_ext) { %>
+		index_ext: "<%=args.index_ext%>",
+		<% 	} 
+			if(args.detail_ext) {
+		%>
+		detail_ext: "<%=args.detail_ext%>",
+		<% 	} 
+			if(args.new_ext) {
+		%>
+		new_ext: "<%=args.new_ext%>",
+		<%	}	%>
+		
+	}, OV);
+
+};
+

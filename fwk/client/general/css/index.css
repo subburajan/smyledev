@@ -1,0 +1,56 @@
+
+.content-list {
+	border-top: 1px solid #eee;
+	padding: 10px;
+}
+
+.file {
+	cursor: pointer;
+}
+
+.manage {
+	margin: 0px auto;
+	border: 1px solid lightgrey;
+	min-width: 700px;
+	background-color: #FFF;
+}
+
+.manage-hdr {
+	min-height: 50px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.manage-cnt {
+
+}
+
+.manage-err {
+	color: red;
+	padding: 5px 10px 5px 26px;
+	background-color: yellow;
+	line-height: 22px;
+	font-size: 80%;
+	margin: 0px;
+}
+
+.manage-butt {
+	border-top: 1px solid lightgrey;
+	padding: 10px 50px;
+	text-align: left;
+}
+
+.list {
+	min-height: 200px;
+}
+
+.list-cnt {
+	border: 1px solid #eee;
+	padding: 20px;
+	min-height: 60px;
+	overflow: hidden
+}
+
+.table-cntr {
+	font-size: 80%;
+	margin: 0px 10px;
+}

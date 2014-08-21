@@ -1,0 +1,65 @@
+
+.header {
+	position: relative;	
+}
+
+.home-rhdr a {
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #333), color-stop(100%, #666));
+	background-image: -moz-linear-gradient(center top, #333 0%, #666 100%);
+	background-image: -webkit-linear-gradient(center top, #333 0%, #666 100%);
+	background-image: -o-linear-gradient(center top, #333 0%, #666 100%);
+	background-image: -ms-linear-gradient(center top, #333 0%, #666 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#333, endColorstr=#666); 
+}
+
+.home-rhdr a {
+	padding: 13px 20px 10px;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.home-rhdr a:hover {
+	text-decoration: underline;
+}
+
+.hdr-menu {
+	position: relative;
+	top: 35px;
+	right: 20px;
+	z-index: 1;
+}
+
+.cntr {
+	margin: 0px;
+}
+
+.bt-cntr {
+	background-color: #FFF;
+	padding: 20px;
+	opacity: 0.6;
+	position: absolute;
+	width: 100%;
+}
+
+.b-title {
+	font-size: 150%;
+	font-weight: bold;
+	color: #000;
+	padding-left: 100px;
+}
+
+.rslides_tabs {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+}
+
+.page-title {
+	color: #eee;
+	text-align: center;
+	position: absolute;
+	top: 35px;
+	margin: 0px;
+	width: 100%;
+	z-index: 0;
+}

@@ -1,0 +1,109 @@
+	
+	<div class="header">
+		<div class="header-line1">
+			<div class="logo">
+				<div class="logo-img"><img src="/common/images/logo.png"></div>
+				<div style="clear:both"></div>
+			</div>		
+			
+			<div class="hdr-menu">
+				<ul>
+				
+				<% 
+					var home = "/";
+					if(typeof(user) != "undefined") { 
+						home = "/home";
+				%>	
+				
+					<li class="login-msg">Signed in <%=user.email %> as <%=user.lias%> </li>
+					<li><a href="/logout">Signout</a></li>
+					
+				<% } else { %>
+				
+					<li class="home-rhdr"><a href="/signup">Sign Up</a></li>
+					<li class="home-rhdr"><a href="/login">Sign In</a></li>
+				
+				<% } %>
+					
+				</ul>
+			</div>
+			
+			<div class="page-title title2" id="pagetitle"></div>
+		
+			<div class="clear"></div>
+		</div>
+		
+	<% if(typeof(menus) != "undefined") { %>
+					
+		<div class="menu">
+			<ul class="menu-bar" id="menu_bar">
+				<li id="home"><a href="<%=home%>">Home</a></li>
+		<% 	
+			var l = menus.length;
+			for(var i = 0; i < l; i++) {
+				var menu = menus[i];
+				var smenu = menu[1];
+		%>
+				<li id="<%=menu[3]%>">
+		<%		if(typeof(smenu) == "string") {		%>
+					<a href="<%=menu[1]%>"><%=menu[0]%></a></li>
+		<%		} else {
+					var k = smenu.length;
+		%>			<a href="javascript:void(0)"><%=menu[0]%></a>
+					<ul class="sub-menu">
+		<%			for(var j = 0; j < k; j++) {
+						menu = smenu[j];
+		%>				<li id="<%=menu[3]%>"><a href="<%=menu[1]%>"><%=menu[0]%></a></li>
+		<%			}
+		%>			</ul>
+				</li>
+		<%		}
+			}
+		%>
+			</ul>
+			<div class="clear"></div>	
+		</div>
+
+	<script type="text/javascript">
+		
+		<% if(typeof(user) != "undefined") { %>
+		var _UserID = '<%=user._id%>';
+		var _Role = <%=user.role%>;
+		<% } else { %>
+		var _Role = <%=PUBLIC.value%>;
+		<% } %>
+		
+	<% if(typeof(per) != "undefined") { %>
+		var _per = <%-JSON.stringify(per)%>;
+	<% } else { %>
+		var _per = { r: true, w: false }
+	<% } %>
+		
+		var Enums = <%-Enums%>
+		
+	</script>
+
+
+	<% } else { %>
+	
+		<div class="header-line2">
+			<div class="page-title title2" id="pagetitle">  </div>
+		</div>
+	
+	<% } %>
+	
+	<% include ../../local/header.ejs %>
+	
+	</div>
+
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			if(typeof(PAGE_TITLE) == "undefined") {
+				PAGE_TITLE = "<%=title%>" || "<%=project.title%>"
+			}
+			$("#pagetitle").html(PAGE_TITLE);
+		});
+	</script>
+
+	

@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+<head><title>Stripe Connect Button</title></head>
+<body>
+
+<style>
+
+body {
+	width: 100%;
+}
+	
+.page {
+	width: 80%;
+	margin: 5% 40%;
+}
+
+</style>
+
+<div class="page">
+	<a href="https://connect.stripe.com/oauth/authorize?landing=login&response_type=code&client_id=<%=client_id%>&state=<%=userid%>">
+		<img src="/images/blue.png" id="stripe_connect">
+	</a>
+</div>
+
+</body>
+</html>

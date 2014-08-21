@@ -1,0 +1,25 @@
+<!Doctype html>
+<html>
+
+<head><title><%=project.title%><%=(title? (" | " + title): "")%></title></head>
+<body>
+
+<link type="text/css" rel="stylesheet" href="/common/css/common.css">
+
+<script src="/jquery/jquery-1.9.1.js"></script>
+
+
+<div class="content">
+
+	<%include ./fwk/common/header.ejs %>
+	
+	<div class="page-content" id="page_content">
+		<%- body %>
+	</div>
+	
+	<%include ./fwk/common/footer.ejs %>
+
+</div>
+
+</body>
+</html>

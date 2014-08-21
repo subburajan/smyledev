@@ -1,0 +1,54 @@
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<%include ../../app/view/general/list-hdr %>
+
+<link type="text/css" rel="stylesheet" href="/test/payments/css/index.css">
+
+<script src="/test/payments/js/index.js"></script>
+
+<script type="text/javascript">	
+
+	Stripe.setPublishableKey("<%=stripeKey%>");
+	
+	var PAGE_TITLE = "Payments Test";	
+
+</script>
+
+<div class="content-hdr">
+
+</div>
+
+<div class="content-list" id="clist">
+	<div class="manage" id="manage">
+		<div class="manage-hdr">
+			<div class="manage-title" id="manage_title"></div> 
+		</div>
+		<div class="manage-err hide" id="manage_err">
+			Error
+		</div>
+		<div class="manage-cnt" id="manage_cnt">
+		
+		</div>
+		
+		<div class="butt-cntr manage-butt">
+		
+			<a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_36TevyvmUJyXv6WdwBVthUqzXqRY0ODj&state=abcd">
+				<img src="/images/blue.png" id="stripe_connect">
+			</a>
+		
+			<span class="butt butt-green" id="an_createUser" ><a href="javascript:void(0)">Create Token and User</a></span>		
+		
+			<span class="butt butt-green" id="an_createToken" ><a href="javascript:void(0)">Create Card </a></span>
+			
+			<span class="butt butt-green" id="an_chargeToken" ><a href="javascript:void(0)">Charge on Card</a></span>
+		</div>
+			
+	</div>
+	
+	<div id="list" class="list">
+		
+	</div>
+</div>
+
+<div class="clear"></div>

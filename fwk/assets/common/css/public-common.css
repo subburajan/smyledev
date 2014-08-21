@@ -1,0 +1,47 @@
+body {
+	background-color: #000;
+	margin: 0px;
+}
+
+.content {
+	width: 88%;
+	margin-top: 0px;
+}
+
+.page-content {
+	-webkit-border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-ms-border-radius: 5px 5px 0 0;
+	-o-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	padding-bottom: 40px;
+}
+
+.header-line1 {
+	float: left;
+}
+
+.header-line2 {
+	float: left;
+	min-height: 50px;
+	margin: 10px 0px 0px;
+}
+
+.page-title {
+	font-size: 160%;
+}
+
+ul.hdr-menu li {
+	float: left;
+	list-style-type: none;
+	font-size: 150%;
+	padding: 0px 20px;
+}
+
+ul.hdr-menu a {
+	text-decoration: none;
+}
+
+ul.hdr-menu a:hover {
+	text-decoration: underline;
+}

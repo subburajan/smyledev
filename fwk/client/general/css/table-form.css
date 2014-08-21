@@ -1,0 +1,97 @@
+
+.new-cntr {
+	min-height: 300px;
+	margin: 40px 10px 50px;
+}
+
+.manage {
+	border: none;
+	border-bottom: 1px solid lightgrey;
+}
+
+.manage-title {
+	float: left;
+}
+
+.lbl {
+	font-size: 90%;
+}
+
+.immutable .lbl {
+	text-align: right;
+	width: 150px;
+	float: left;
+}
+
+fieldset {
+	margin: 0px;
+	padding: 10px 0px;
+}
+
+legend {
+	border-bottom: 1px solid #ddd;
+	font-weight: normal;
+	font-size: 110%;
+	padding: 0 0 8px 0;
+	display: block;
+	width: 100%;
+	color: #444;
+	margin-left: -1px;	
+}
+
+.ro-lbl {
+	margin-left: 100px;
+	font-size: 80%;
+	font-weight: normal;
+}
+
+.ro {
+	margin-left: 20px;
+	font-size: 90%;
+	font-weight: bold;
+}
+
+.created {
+	position: relative;
+	float: right;
+}
+
+.created .ro-lbl {
+	font-size: 85%;
+}
+
+.fields-image .lbl {
+	text-align: left;
+}
+
+.fields-disp-image img {
+	width: 100px;
+	height: auto;
+}
+
+.succ-msg {
+	font-size: 100%;
+	margin-left: 20px;
+	margin-top: 20px;
+	color: "#0000FF";
+}
+
+.cnt-body {
+	min-height: 100px;
+}
+
+.table-form-msg {
+	color: blue;
+	padding: 5px 50px 5px 26px;
+	background-color: yellow;
+	line-height: 20px;
+	border: 1px solid lightgrey;
+	font-size: 80%;
+	margin: 0px 10px;
+	border-bottom: none;
+	text-align: right;
+}
+
+.manage-err {
+	border-top: 1px solid lightgrey;	
+}

@@ -1,0 +1,207 @@
+
+$(document).ready(function() {
+	
+	var cfg = {
+		title: "<%=args.title%>",
+		URI: "/<%=args.id%>",
+		jq: {
+			type: <%=args.pageType%>,		
+			cols: [
+	<% 
+			if(args.table._seq) {
+	%>
+				{ "sTitle": "Seq", id: "snum" },
+	<%		}
+	
+		var jqfMap = {}, jqfids = [];
+		
+		var tf_map = args.fieldIdMap;
+		
+		args.jq_fields.forEach(function(field) { 
+			
+			var isArr = field._isArray && "_arr" || "";
+			
+			var tf = tf_map[field.id];
+			
+	%>			{ "sTitle": "<%=field.ui_name%>", id: "<%=field.id%>" <%
+			
+			jqfMap[field.id] = field;
+			jqfids.push(field.id);
+			
+			var det = 0;
+			if(field.ui_detlnk) {
+				det = "\"/" + args.id + "\"";
+			}
+			
+			if(field._enum) {
+				
+				%>, "mRender": JQF.enum<%=isArr%>(Enums.<%=field._enum.name%>, <%-det%>)  <%
+				
+			} else if(field._ref) {
+				var sel = tf.ui_jq_pop_sel;
+				
+				if(tf.ref_enumFields) {
+				
+				%>,	"mRender": JQF.obj_enums(<%-JSON.stringify(sel)%>, <%-JSON.stringify(tf.ref_enumFields)%>, <%-det%>) <%
+				
+				} else {
+
+					var arrOrFields;
+					if(sel.length > 1) {
+						arrOrFields = "_fields";
+					} else {
+						arrOrFields = isArr;
+					}
+
+					sel = JSON.stringify(sel) + ",";
+				
+				%>,	"mRender": JQF.obj<%=arrOrFields%>(<%-sel%> <%-det%>) <%
+				
+				}
+				
+			} else if(field.ui_itype.value == 4) {
+				
+				%>, "mRender": JQF.bool(<%-det%>) <%
+				
+			} else if(field.ui_itype.value == 5) {
+				
+				%>, "mRender": JQF.image(<%-det%>) <%
+				
+			} else if(field.ui_itype.value == 7) {
+				
+				%>, "mRender": JQF.date(<%-det%>) <%
+				
+			} else if(field.ui_detlnk) {
+				
+				%>,	"mRender": JQF.detail("/<%-args.id%>") <%
+				
+			}
+			
+			%> },
+	<%	});	%>
+			]<%
+			
+	    if(args.tlinks) {
+	    	%>,
+	    	links: [<%
+	    	args.tlinks.forEach(function(tl) {
+	    		if(tl.field != null || tl.type == 3) {
+	    			return;
+	    		}
+	    		var roles = [];
+	    		tl.roles.forEach(function(tr) {
+	    			roles.push(tr.seq);
+	    		});
+	    		roles = JSON.stringify(roles);
+	    	
+				%> {
+				title: "<%=tl.title%>",
+				url: "<%-tl.url%>",
+				roles: <%-roles%>,
+				type: "<%=tl.href? "href": "post"%>",<%
+
+				if(tl.params) { %>
+				params: [ "<%=tl.params.join("\",\"")%>" ]<%
+			
+				}%>			
+			}, <%
+			
+	    	});
+	    	
+	    %>	]
+	 
+	 <%	} %>
+	
+		},
+		search: {
+       		fields: [
+    <%	
+    	args.table.fields.forEach(function(field) {
+    		if(field.ui_jq_search && jqfMap[field.id]) {
+    			field = jqfMap[field.id];
+    			var itype = field.ui_itype.value;
+    			if(itype == 9 || itype == 13 || itype == 15) {
+    				itype = "enum_select";
+    			} else if(itype == 4) {
+    				itype = "select";
+    			} else if(itype == 12) {
+    				itype = "select_ext";
+    			} else {
+    				itype = field.ui_itype.addInfo.d;
+    			}
+   %>	
+				{ id: "<%=field.id%>", name: "<%=field.ui_name%>", 
+				 	type: "<%=field.ui_type%>",   itype: "<%=itype%>" <%
+				if(field.ui_default) {
+				%>, default: "<%=field.ui._default%>"<%
+				} 
+				if(field._enum) {
+				%>, args: { enum: Enums.<%=field._enum.name%>	}<% 
+				}
+				if(field._ref) {
+				%>, args: { uri: "/opts/<%=jqfMap[field.id]._ref.name%>" }<%
+				}
+				
+				if(field.ui_itype.value == 4) {
+				%>
+				, args: { opts: [ { text: "Yes", val: true }, { text: "No", val: false } ] }
+				
+				<%
+				}
+			%>	},
+	<%
+       		}
+       	});
+       	
+       	if(args.pageType != Enums.PageTypes.JQ_FIXED.value) {
+       	
+	%>
+			]
+       	},
+       	
+       	manage: {
+       		fields: [
+    <%	
+    	var di_factor = args.table._seq? 2: 1;
+    
+    	args.man_fields.forEach(function(field) {
+    		
+    		var dataInd = jqfids.indexOf(field.id);
+    		if(dataInd > -1) {
+    			dataInd += di_factor;
+    		}
+    	
+    %>	
+    			{ id: "<%=field.id%>", name: "<%=field.ui_name%>", 
+					 type: "<%=field.ui_type%>",   itype: "<%=field.ui_itype.addInfo.d%>" <%
+				if(field.ui_default) {
+				%>, default: "<%=field.ui_default%>"<%
+				} 
+				if(field._enum) {
+				%>, args: { enum: Enums.<%=field._enum.name%>	}<% 
+				}
+				if(field._ref) {
+				%>, args: { uri: "/opts/<%=field._ref.name.toLowerCase()%>" 	}<%
+				}
+				%>, dataInd: <%=dataInd%>, required: <%=field._req%>
+       			},
+    <%	
+    	
+    	});
+    	
+    	}
+    	
+    %>
+       		]
+       	}
+	};
+	
+	if(typeof(ExtInit) != "undefined") {
+		ExtInit(cfg, function() {
+			return TableForm.init(cfg, _obj);
+		});
+	} else {
+		TableForm.init(cfg, _obj);
+	}
+});
+

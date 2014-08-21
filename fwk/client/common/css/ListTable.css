@@ -1,0 +1,87 @@
+
+.table-cntr {
+	border: 1px solid lightgrey;
+}
+
+table {
+	border-spacing: 0px;
+}
+
+.table-cntr > div {
+	padding: 10px 25px;
+}
+
+.lt-box {
+	float: left;
+	border: 6px solid #AAA;
+	margin: 10px;
+	padding: 5px 5px 0px;
+	min-height: 200px;
+	border-spacing; 0px;
+}
+
+.lt-box td {
+	padding: 5px 0px;
+}
+
+.lt-label {
+	line-height: 18px;
+	float: left;
+	width: 80px;
+	margin-right: 5px;
+}
+
+.lt-value {
+	float: left;
+	font-weight: bold;
+	line-height: 18px;
+	font-size: 110%;
+}
+
+.lt-hdr {
+	border-bottom: 1px solid lightgrey;
+	background-color: #EEE
+}
+
+.lt-value-ext {
+	font-weight: bold;
+	line-height: 18px;
+	font-size: 110%;
+	width: 290px;
+}
+
+
+.lt-hdr-txt1 {
+	margin-right: 5px;	
+}
+
+.lt-hdr-txt2 {
+	margin-left: 5px;
+}
+
+.lt-hdr-pag-msg {
+	margin-left: 50px;
+}
+
+.lt-hdr-pag {
+	float: right;
+}
+
+.lt-hdr-pag span {
+	padding: 0px 4px;
+	margin: 0px 2px;
+	display: block;
+	float: left;
+	height: 20px;
+	line-height: 22px;
+	background-color: #d6d6d6;
+	color: #989898;
+	cursor: auto;
+	border: 1px solid #ADADAD;
+}
+
+span.enabled {
+	cursor: pointer;
+	background-color: #FFF;
+	color: #000;
+}

@@ -1,0 +1,72 @@
+
+.uploader {
+	width: auto;
+	overflow: hidden;
+}
+
+.uploader {
+	position: relative;
+}
+
+.uploader iframe {
+	display: none;
+}
+
+.uploader input {
+	width: 60px;
+	height: 32px;
+	opacity: 0;
+	position: absolute;
+	left: 0;
+}
+
+.up-value {
+	line-height: 35px;
+	padding: 0px 5px;
+	font-size: 90%;
+	color: #666;	
+}
+
+.up-browse, .up-value, .up-butt {
+	float: left;
+}
+
+.up-browse, .up-butt {
+	min-width: 60px;
+}
+
+.up-value {
+	width: 235px;
+	border: 1px solid #aaa;
+	height: 32px;
+	padding-right: 2px;
+	overflow: hidden;
+	font-size: 80%;
+}
+
+.clear {
+	clear: both;
+}
+
+.uploader .butt a {
+	color: #fff;
+}
+
+.uploader a {
+	color: #333;	
+}
+
+.preview img {
+	width: auto;
+	height: 50px;
+}
+
+.disabled a {
+	color: #ddd;
+	cursor: default;
+}
+
+.preview-remove {
+	font-size: 80%;
+	text-decoration: underline;
+}

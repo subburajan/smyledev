@@ -1,0 +1,51 @@
+
+
+<%include ../hdrs/list-hdr %>
+
+<script src="/general/js/index.js"></script>
+
+<script type="text/javascript">	
+
+	var CFG = <%- cfg %>
+	
+	$(document).ready(function() {
+		onready();
+	});
+	
+	CFG.listView = {
+		getURL: CFG.getURL,
+		renderId: "#list"	
+	};
+	
+	var PAGE_TITLE = CFG.name;	
+
+</script>
+
+<div class="content-hdr">
+	<span class="butt butt-def" id="an_butt" style="width:200px">
+		<a href="javascript:void(0)">Add New </a>
+	</span>
+</div>
+
+<div class="content-list" id="clist">
+	<div class="manage" id="manage" style="display:none">
+		<div class="manage-hdr">
+			<div class="manage-title" id="manage_title"></div> 
+		</div>
+		<div class="manage-cnt" id="manage_cnt">
+		
+		</div>
+		
+		<div class="butt-cntr manage-butt">
+			<span class="butt butt-def" id="an_save" ><a href="javascript:void(0)">SAVE</a></span>
+			<span class="butt butt-def" id="an_cancel" ><a href="javascript:void(0)">CANCEL</a></span>
+		</div>
+			
+	</div>
+	
+	<div id="list" class="list">
+		
+	</div>
+</div>
+
+<div class="clear"></div>

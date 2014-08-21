@@ -1,0 +1,28 @@
+
+.search-bar {
+	border: 1px solid lightgrey;
+	border-bottom: none;
+	padding: 10px 10px 15px 10px;
+	margin: 0px 10px;
+}
+
+.search-fields {
+	float: left;
+	width: 910px;	
+}
+
+.search-fields .fields {
+	float: left;
+	margin-right: 30px;
+	min-height: 70px;
+}
+
+.search-fields .fields input, .search-fields .fields select {
+	width: 150px;
+}
+
+.search-butt {
+	float: right;
+	position: relative;
+	top: 10px;
+}

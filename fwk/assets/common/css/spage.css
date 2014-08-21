@@ -1,0 +1,76 @@
+
+.content {
+	margin: 100px auto;
+	width: 500px;
+}
+
+.page-content {
+	min-height: 200px;
+	padding: 15px;
+}
+
+.logo {
+	float: left;
+}
+
+.active-title {
+	float: right;
+	position: relative;
+	right: 50px;
+	font-size: 180%;
+	margin-top: 25px;
+}
+
+.row {
+	margin: 10px 0px 0px;
+}
+
+.row .lbl, .row .inp {
+	float: left;
+}
+
+.lbl {
+	width: 140px;
+	text-align: right;
+	margin: 10px 20px;
+}
+
+.inp > input {
+	width: 250px;
+}
+
+.butt-row {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.header {
+	padding: 15px;	
+}
+
+.err-msg {
+	font-size: 95%;
+	text-align: center;
+	margin: 10px 10px 0px;
+}
+
+.succ-msg {
+	font-size: 90%;
+	background-color: #eee;
+	padding: 10px;
+	line-height: 20px;
+	margin: 7px 0px 0px;
+}
+
+.page-info {
+	font-size: 90%;
+	background-color: #eee;
+	padding: 10px;
+	line-height: 20px;
+	margin-bottom: 20px;
+}
+
+.page-info P {
+	padding: 0px;
+	margin: 5px;
+}

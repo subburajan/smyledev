@@ -1,0 +1,97 @@
+
+var path = require('path');
+
+var project = "<%=name%>";
+
+var dbuser = "<%=name%>";
+
+var arg = {
+	title: "<%=title%>",
+	name: "<%=name%>",
+};
+
+var mongohost = "localhost";
+
+module.exports = {
+	getCfg: function(type) {
+		return cfg[type];
+	},
+	
+	getArgs: function() {
+		return arg;
+	}
+};
+
+var cfg = {
+	development: {
+		port: 5001,
+		
+		WWW: "http://localhost:5001",
+		
+		db: "mongodb://" + dbuser + "_dev:" + dbuser + "_dev@" + mongohost + "/" + project + "_dev",
+		session_secret: "devt",
+		facebook: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		twitter: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		google: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		}
+	},
+	
+	test: {
+		port: 5002,
+		
+		WWW: "http://localhost:5002",		
+		
+		db: "mongodb://" + dbuser + "_test:!yatsew73@" + mongohost + "/" + project + "_test",
+		session_secret: "wyawarlt",
+		facebook: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		twitter: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		google: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		}
+	},
+	
+	production: {
+		port: 5000,
+		
+		WWW: "http://localhost:5000",		
+		
+		db: "mongodb://" + dbuser + "_prod:n0password@" + mongohost + "/" + project + "_prod",
+		session_secret: "wyawarlt",
+		facebook: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		twitter: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		},
+		google: {
+			clientID: "",
+			clientSecret: "",
+			callbackURL: ""
+		}
+	}
+};

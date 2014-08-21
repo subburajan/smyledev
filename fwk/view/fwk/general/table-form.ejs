@@ -1,0 +1,64 @@
+
+<%include ../hdrs/table-form-hdr %>
+
+<link type="text/css" rel="stylesheet" href="/<%=pageid%>/css/index.css">
+
+<script src="/<%=pageid%>/js/index.js"></script>
+
+<script type="text/javascript">
+	var PAGE_TITLE = "<%=page_title%>";
+	
+	<% if(typeof(_obj) != "undefined") { %>
+		var _obj = <%-_obj%>
+	<% } %>
+	
+</script>
+
+<% if(ext_script) {	%>
+<script src="<%=ext_script%>"></script>
+<%	}	%>
+
+<div class="content-manage overlay shadow" id="form_ol" style="display:none">
+	<div class="manage" id="form_cntr">
+		<div class="manage-hdr">
+			<div class="manage-title" id="form_title"></div> 
+		</div>
+		<div class="manage-cnt" id="form_cnt">
+		
+		</div>
+		<div class="manage-err hide" id="form_err">
+			
+		</div>
+		<div class="butt-cntr manage-butt">
+			<span class="butt butt-def" id="form_butt_save" ><a href="javascript:void(0)">Save </a></span>
+			
+			<span class="butt butt-def" id="form_butt_cancel" ><a href="javascript:void(0)">Cancel</a></span>
+		</div>
+	</div>
+</div>
+
+<div class="content-hdr">
+	<div class="chdr-title" id="chdr_title"><%-page_title%></div>
+	
+	<div class="chdr-butts" id="form_hdr_butts">
+		<span class="butt butt-def" id="form_butt_addnew" style="visibility:hidden"><a href="javascript:void(0)">Add New </a></span>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+
+<div class="table-form-msg hide" id="form_hdr_msg">
+	Error
+</div>
+
+<% if(typeof(search) != "undefined" && search) { %>
+
+<div class="search-bar" id="form_search_bar">
+
+</div>
+
+<% } %>
+
+<div class="table-cntr">
+	<table id="table"></table>
+</div>

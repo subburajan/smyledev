@@ -1,0 +1,73 @@
+
+.content-add {
+	min-width: 325px;
+	background: #FFF;
+	border: 1px solid lightgrey;	
+}
+
+.content-list {
+	font-size: 90%;
+	padding: 20px;
+}
+
+.content-hdr .left {
+	float: left
+}
+
+.content-hdr .right {
+	float: right;
+	text-align: right;
+}
+.content-list > .title3 {
+	padding-top: 5px;
+}
+
+.ui-widget-header1 {
+	background-image: -webkit-gradient(linear, left top, left bottom,
+			 color-stop(0%, #666), color-stop(100%, #888));
+	background-image: -moz-linear-gradient(center top, #666 0%, #888 100%);
+	background-image: -webkit-linear-gradient(center top, #666 0%, #888 100%);
+	background-image: -o-linear-gradient(center top, #666 0%, #888 100%);
+	background-image: -ms-linear-gradient(center top, #666 0%, #888 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#666, endColorstr=#888);   
+	border: 1px solid #888;
+}
+
+.butt-cntr .butt {
+	margin-right: 20px;
+}
+
+.col-image {
+	width: auto;
+	height: 50px;
+}
+
+.content-hdr {
+	margin: 50px 10px 0px;
+	min-height: 44px;
+	border: 1px solid lightgrey;
+	border-bottom: none;
+	background: #EEE;
+}
+
+.chdr-title {
+	float: left;
+	position: relative;
+	top: 5px;
+	font-size: 120%;
+	margin-left: 10px;
+	padding: 10px;
+}
+
+.chdr-butts {
+	float: right;
+	text-align: right;
+	padding: 10px;
+	position: relative;
+}
+
+.chdr-title span {
+	font-size: 85%;
+	margin: 0px 5px 0px 10px;
+}
+

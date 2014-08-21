@@ -1,0 +1,46 @@
+
+<% include ../common/sheader %>
+
+<script src="/jquery/jquery-1.9.1.js"></script>
+<script src="/common/js/common.js"></script>
+<script src="/common/js/inputs.js"></script>
+<script src="/common/js/pwdreset.js"></script>
+
+<link rel="stylesheet" href="/common/css/inputs.css">
+
+<script type="text/javascript">
+	var ID = '<%=user._id%>';	
+</script>
+
+<style type="text/css">
+	.fpwd-login {
+		text-align: center;
+		margin: 10px;
+		font-size: 120%;
+		font-weight: bold;
+	}
+</style>
+
+<div class="page-info">
+	Hi <%=user.name%>, <br><P>Please enter your new password.</P>
+</div>
+<div id="pwd_reset_cntr">
+    <div class="row">
+        <div class="lbl">New Password</div>
+        <div class="inp"><input type="password" id="pwd1" name="pwd1"></div>
+        <div class='clear'></div>
+    </div>
+    <div class="row">
+        <div class="lbl">Confirm Password</div>
+        <div class="inp"><input type="password" id="pwd2" name="pwd2"></div>
+        <div class='clear'></div>
+    </div>
+    <div class='err-msg err-col' id="err_msg">
+    	
+    </div>
+    <div class="row butt-row">
+        <span class="butt butt-def" id="reset" ><a href="javascript:void(0)">RESET</a></span>
+    </div>
+</div>
+
+<%include ../common/sfooter %>

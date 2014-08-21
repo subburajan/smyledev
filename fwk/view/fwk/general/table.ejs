@@ -1,0 +1,41 @@
+
+
+<%include ../hdrs/table-hdr %>
+
+<link type="text/css" rel="stylesheet" href="/admin/<%=pageid%>/css/index.css">
+
+<script src="/admin/<%=pageid%>/js/index.js"></script>
+
+<script type="text/javascript">	
+	var Args = <%-JSON.stringify(args)%>;
+</script>
+
+<div class="content-hdr">
+	<div class="chdr-title"><%-page_title%></div>
+	
+	<div class="chdr-butts">
+	<%
+		if(typeof(butts) != "undefined") {
+			for(var k in butts) {
+		%>
+			<span class="butt butt-def" id="<%=k%>" ><a href="javascript:void(0)"><%=butts[k]%></a></span>
+			
+		<% }
+		}
+	%>
+	</div>	
+	
+	<div class="clear"></div>
+</div>
+
+<% if(typeof(search) != "undefined" && search) { %>
+
+<div class="search-bar" id="search_bar">
+
+</div>
+
+<% } %>
+
+<div class="table-cntr">
+	<table id="table"></table>
+</div>

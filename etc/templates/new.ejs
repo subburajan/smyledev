@@ -1,0 +1,36 @@
+
+$(document).ready(function() {
+	
+	var cfg = {
+		title: "<%=args.title%>",
+		URI: "/<%=args.id%>",
+       	fields: [
+    <%	
+    	args.man_fields.forEach(function(field) {
+    %>	
+    			{ id: "<%=field.id%>", name: "<%=field.ui_name%>", 
+					 type: "<%=field.ui_type%>",   itype: "<%=field.ui_itype.addInfo.d%>" <%
+				if(field.ui_default) {
+				%>, default: "<%=field.ui_default%>"<%
+				} 
+				if(field._enum) {
+				%>, args: { enum: Enums.<%=field._enum.name%>	}<% 
+				}
+				if(field._ref) {
+				%>, args: { uri: "/opts/<%=field._ref.name%>" 	}<%
+				}
+				%>, required: <%=field._req%>
+       			},
+    <%	});	%>
+       	]
+	};
+
+	if(typeof(ExtInit) != "undefined") {
+		ExtInit(cfg, function() {
+			NewForm.init(cfg);
+		});
+	} else {
+		NewForm.init(cfg);
+	}
+});
+

@@ -1,0 +1,22 @@
+
+
+module.exports = {
+	
+	<%	
+		args.forEach(function(obj) {	
+	%>
+	<%=obj.name.replace(" ", "_")%>: {
+	<%	
+		obj.values.forEach(function(row) {
+			var name = row.name || row.text;
+	%>
+		<%=name.toUpperCase()%>: { value: <%=row.value%>, text: "<%=row.text%>" },
+	<% 	
+		});
+	%>
+	},
+	<% 
+		});
+	%>
+
+};

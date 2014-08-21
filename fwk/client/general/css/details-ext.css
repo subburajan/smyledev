@@ -1,0 +1,75 @@
+
+.details {
+	min-height: 300px;
+	margin: 0px 10px 50px;
+	border: 1px solid lightgrey;
+}
+
+table {
+	padding: 10px 30px;
+}
+
+table td {
+	min-width: 130px;
+	text-align: right;
+	padding: 10px 5px;
+	font-size: 100%;
+	color: #333;
+	font-size: 85%;
+}
+
+table td + td {
+	padding: 5px 10px;
+	text-align: left;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.child-details {
+	border-top: 1px solid lightgrey;
+}
+
+.butts {
+	margin: 10px 30px 30px;
+}
+
+.child-chdr {
+	min-height: 40px;
+	padding: 10px 0px 5px;	
+}
+
+.child-chdr-title {
+	padding: 10px 20px;
+	float: left;
+}
+
+.child-chdr-title a:hover {
+	text-decoration: underline;	
+}
+
+.child-chr-butts {
+	padding: 10px 20px;	
+	float: right;
+	font-size: 95%;
+}
+
+.child-content {
+	border-top: 1px solid lightgrey;	
+	min-height: 300px;
+}
+
+.child-butts {
+	border-top: 1px solid lightgrey;
+	min-height: 35px;
+	padding: 10px;
+	text-align: right;
+}
+
+.immutable .subset-butts {
+	display: none;
+}
+
+.chdr-title-lbl {
+	font-size: 100%;
+	margin-right: 50px;
+}

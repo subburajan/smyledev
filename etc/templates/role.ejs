@@ -1,0 +1,109 @@
+
+var fs = require("fs");
+
+function newRole() {
+	var map = {
+		value: arguments[0],
+		text: arguments[1],
+		addInfo: arguments[2]
+	};
+	return map;
+}
+
+var roles = {
+<%
+	args.forEach(function(role) {
+	
+	%>
+	
+	<%=role.name.toUpperCase()%>: newRole(<%=role.seq%>, "<%=role.name%>", [	
+<%		
+		if(role.seq == 2) {
+%>			[ "Users", "/admin/user", 2, "user" ],
+<%
+		}
+		role.menus.forEach(function(menu, indx) {
+%>		
+			[ "<%=menu.name%>", <% 
+			
+			if(menu.childs == null || menu.childs.length == 0) {
+				var pid, uri;
+				if(menu.pageuri != null) {
+					pid = menu.pageuri;
+					uri = pid;
+					var i = pid.indexOf("?");
+					if(i > -1) {
+						pid = pid.substring(0, i);					
+					}
+					pid = pid.replace(/\//g, '_');
+				} else if(menu.pageid != null) {
+					pid = menu.pageid.id;
+					uri = "/" + pid;
+				} else if(menu.tablePage != null) {
+					pid = menu.tablePage.id;
+					uri = "/" + pid;
+				}
+								
+				%> "<%=uri%>", 2, "<%=pid%>" ], <%
+
+			} else {
+
+			%>	[ 
+			<%
+
+				menu.childs.forEach(function(child) {
+					var pid, uri;
+					if(child.pageuri != null && child.pageuri.trim().length > 0) {
+						pid = child.pageuri;
+						uri = pid;
+						var i = pid.indexOf("?");
+						if(i > -1) {
+							pid = pid.substring(0, i);					
+						}
+						pid = pid.replace(/\//g, '_');
+					} else if(child.pageid != null) {
+						pid = child.pageid.id;
+						uri = "/" + pid;
+					} else if(child.tablePage != null) {
+						pid = child.tablePage.id;
+						uri = "/" + pid;
+					}
+
+			%>		[ "<%=child.name%>", "<%=uri%>", 2, "<%=pid%>" ],
+			<%	
+				});
+
+			%>	], 2, "menubar_<%=indx%>"
+			
+			],
+<%
+			}
+		});
+		
+%>
+		]),
+
+<%	});	%>
+
+};
+
+var access = {
+<%
+	args.forEach(function(role) {
+	
+%>	<%=role.seq%>: {
+<%		
+		if(role.ra) {
+
+%>		model: "<%=role.ra.model%>",
+		foreign: [ "<%=role.ra.foreign.join("\",\"")%>" ]
+<%
+		}
+%>	},
+<%
+	});
+%>
+};
+
+module.exports = { roles: roles, access: access };
+

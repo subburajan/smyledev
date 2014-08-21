@@ -1,0 +1,105 @@
+
+<script type="text/javascript">
+	var PAGE_TITLE = "<%=page_title%>";
+	var _obj = <%-obj%>
+</script>
+
+<%include ../hdrs/detail-table-form-hdr %>
+
+<link type="text/css" rel="stylesheet" href="/<%=pageid%>/css/detail.css">
+
+<script src="/<%=pageid%>/js/detail.js"></script>
+
+<% if(ext_script) {	%>
+<script src="<%=ext_script%>"></script>
+<%	}	%>
+
+<div class="details">
+
+<div class="manage content-manage" id="form_cntr">
+	<div class="manage-hdr">
+		<div class="manage-title" id="form_title"></div> 
+		<div class="chdr-butts" id="hdr_links">
+	
+			<a href='javascript:void(0)' id="form_butt_edit" style='display:none'>
+				<span class="butt butt-def"> Edit </span>
+			</a>
+	
+			<a href='javascript:void(0)' id="form_butt_save" style='display:none'>
+				<span class="butt butt-def"> Save </span>
+			</a>
+			
+			<a href='javascript:void(0)' id="form_butt_cancel" style='display:none'>
+				<span class="butt butt-def"> Cancel </span>
+			</a>
+	
+		</div>
+		
+		<div class="clear"></div>
+		
+	</div>
+	<div class="manage-err hide" id="form_err">
+		Error
+	</div>
+	<div class="manage-cnt" id="form_cnt">
+		<div class='created'>
+			<span class='ro-lbl'>Created Date</span>
+			<span class='ro' id="cr"></span>
+		</div>
+	
+	</div>
+	
+</div>
+
+<div class="table-form">
+<% 	
+	for(var k in subdocs) {
+		var subdoc = subdocs[k];
+%>
+	<div class="content-hdr">
+		<div class="chdr-title"><%-subdoc.title%></div>
+		
+		<div class="chdr-butts" id="<%=k%>_hdr_butts">
+			<span class="butt butt-def" id="<%=k%>_butt_addnew" style="visibility:hidden">
+				<a href="javascript:void(0)">Add New </a>
+			</span>
+		</div>
+		
+		<div class="clear"></div>	
+	</div>
+	
+	<div class="table-cntr">
+		<table id="<%=k%>_table"></table>
+	</div>
+	
+<%	} %>
+
+</div>
+
+<div id="notes"></div>
+
+</div>
+
+<!-- 
+
+<div class="content-manage overlay shadow" id="man_cntr" style="display:none">
+	<div class="manage" id="table_form">
+		<div class="manage-hdr">
+			<div class="manage-title" id="table_form_title"></div> 
+		</div>
+		<div class="manage-cnt" id="table_form_cnt">
+		
+		</div>
+		<div class="manage-err hide" id="table_form_err">
+			
+		</div>		
+		<div class="butt-cntr manage-butt">
+			<span class="butt butt-def" id="man_save" ><a href="javascript:void(0)">Save </a></span>
+			
+			<span class="butt butt-def" id="man_cancel" ><a href="javascript:void(0)">Cancel</a></span>
+		</div>
+	</div>
+	
+</div>
+
+-->

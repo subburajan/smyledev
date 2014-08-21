@@ -1,0 +1,32 @@
+
+<%include ../../fwk/hdrs/table-form-hdr %>
+
+<script type="text/javascript">	
+	var PAGE_TITLE = "Projects";
+	
+	$(document).ready(function() {	
+		var loginTime = <%-JSON.stringify(user.log_time)%>;
+		loginTime = DateFormatter.dateToStr(DateFormatter.utcStrToDate(loginTime));
+		$("#last_login").html(loginTime);
+	});
+</script>
+
+<style>
+	.last-login {
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		color: #AEAEAE;
+	}
+	
+	.last-login span {
+		margin-left: 10px;
+		color: #666;
+	}
+	
+</style>
+
+<div class='last-login'>
+Login Time: <span id="last_login"></span>
+</div>
+

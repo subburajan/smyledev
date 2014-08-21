@@ -1,0 +1,81 @@
+
+var FWK = "../../../../fwk/server";
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var _Schema = new Schema({
+	mute: { type: Boolean, default: true },
+<%	if(args._seq) { %>
+	snum: { type: Number },
+<%	}
+	args.fields.forEach(function(field) {
+		
+		if(field.childs != null && field.childs.length > 0) {
+	
+%>	<%=field.id%>: [{
+<%	
+			field.childs.forEach(function(child) {
+			if(!child) return; 
+	
+%>		<%=child.id%>: <%=child._isArray && "[" || ""%>  { 
+			type: <%=child._type.addInfo.d%>, required: <%=child._req%>, <% if(child._ref) { %>	ref: "<%=child._ref.name%>" <% } %>
+		 <% if(child._enum) { %> default: 1 <% } %> }<%=child._isArray && "]" || ""%>,
+<%
+			});
+%>	}],
+
+<%
+		
+		} else {
+
+%>	<%=field.id%>: <%=field._isArray && "[" || ""%>  { 
+		type: <%=field._type.addInfo.d%>, required: <%=field._req%>, <% if(field._ref) { %>	ref: "<%=field._ref.name%>" <% } %>
+		<% if(field._enum) { %> default: 1 <% } %>
+	}<%=field._isArray && "]" || ""%>, 
+<%	
+		
+		}
+	});
+	
+%>
+
+	crBy: { type: Schema.Types.ObjectId <%
+	
+		var hasPublic = false;
+		args.writer.forEach(function(role) {
+			if(role.name == "Public") {
+				hasPublic = true;
+			}
+		});
+		
+		hasPublic || args.creator.forEach(function(role) {
+			if(role.name == "Public") {
+				hasPublic = true;
+			}
+		});
+		
+		if(!hasPublic) {
+	%>, required: true <%
+		}
+	%> },
+	
+	created: { type: Date },	
+	
+	mdBy: { type: Schema.Types.ObjectId },
+	modified: { type: Date }
+	
+});
+   
+var SchemaUtil = require(FWK + "/common/SchemaUtil");
+
+var model = mongoose.model("<%=args.name%>", _Schema);
+<%	if(args._seq) { %>
+SchemaUtil.addCrMdSNum(_Schema, model, "<%=args.name%>");
+<%	} else { %>
+SchemaUtil.addCrMd(_Schema);
+<%	}	%>
+<%	if(args._unique) { %>
+SchemaUtil.addUniqueChecker(_Schema, model, "<%=args._unique.id%>", "<%=args._unique.ui_name%>");
+<%	} %>
+model.paginate = require(FWK + "/common/Paginate")(model);

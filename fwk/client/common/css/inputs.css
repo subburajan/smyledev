@@ -1,0 +1,93 @@
+
+.req {
+	color: red;
+	padding: 0 5px;
+	font-weight: bold;
+	font-size: 120%;
+	position: absolute;
+}
+
+input {
+	line-height: 26px;
+	height: 26px;
+	font-size: 90%;
+}
+
+textarea {
+	font-size: 90%;
+}
+
+select {
+	line-height: 26px;
+	height: 26px;
+	font-size: 100%;
+}
+
+.inp-sample {
+	font-size: 75%;
+	margin: 5px 0px;
+	font-style: italic;
+	color: #293FCC;
+}
+
+.manage-cnt {
+	padding: 20px;
+}
+
+.manage-cnt .fields {
+	padding: 8px;	
+}
+
+.manage-title {
+	line-height: 30px;
+	padding: 10px;
+	font-size: 120%;
+}
+
+.lbl {
+	font-size: 90%;	
+}
+
+.disp-val {
+	margin-left: 30px;
+	font-weight: bold;
+	font-size: 110%;
+}
+
+.inp {
+	padding-top: 5px;
+}
+
+.txt-field {
+	width: 320px;	
+}
+
+.txt-area {
+	width: 320px;
+	height: 70px;
+}
+
+.sel-field {
+	width: auto;
+	height: 26px;
+	line-height: 26px;
+}
+
+.date-field {
+	cursor: pointer;
+}
+
+.manage-col {
+	text-align: right;
+	position: relative;
+}
+
+.manage-col > a {
+	line-height: 20px;
+	margin-right: 10px;
+}
+
+.up-browse, .up-butt {
+	margin-left: 0px;
+	margin-right: 0px;
+}

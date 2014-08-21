@@ -1,0 +1,39 @@
+
+.subset-cntr {
+	margin: 10px 10px;
+}
+
+.subset {
+	border: 1px solid lightgrey;
+	height: 150px;
+	overflow: scroll;
+	width: 300px;
+	display: inline-block;
+}
+
+.subset-left {
+	float: left;
+	margin-right: 30px;
+}
+
+.subset-right {
+}
+
+.subset-opt {
+	font-size: 95%;
+	padding: 10px 10px 5px 10px;
+}
+
+.subset-opt a.so-action {
+	font-size: 85%;
+	text-decoration: underline;
+	float: right;
+}
+
+.immutable .subset-opt a.so-action, .immutable .subset-right {
+	display: none;
+}
+
+.immutable .subset, .immutable .subset-opt {
+	border: none;
+}

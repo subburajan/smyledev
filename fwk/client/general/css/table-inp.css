@@ -1,0 +1,24 @@
+
+
+table.table-inp {
+	margin: 5px 0px;
+	padding: 0px;
+	border: 1px solid lightgrey;
+}
+
+.table-inp th {
+	min-width: 100px;
+	line-height: 30px;
+	background-color: #EEE;
+	padding: 0px 10px;
+}
+
+.table-inp td {
+	text-align: center;
+	line-height: 30px;
+}
+
+
+.tb-txt-field {
+	width: 200px;
+}

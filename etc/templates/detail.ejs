@@ -1,0 +1,251 @@
+/******
+ * 
+ *	@author Subburajan
+ *  @date   March 2014
+ */
+$(document).ready(function() {
+<%
+	var uri = "/" + args.id;
+	
+	var dj_sets = args.det_jq_sets;
+	var formName = dj_sets && dj_sets.length > 0 ? "DetailTable": "Detail";
+%>
+
+	var title = "<%=args.title%>";
+	if(_obj && _obj.snum) {
+		title = "Serial: <span class='serial'>" + _obj.snum + "</span>";
+	}
+
+	var cfg = {
+		URI: "<%=uri%>",
+		obj: _obj,
+		title: title,
+<%
+	
+    if(args.tlinks) {
+    	%>
+    	links: [<%
+    	args.tlinks.forEach(function(tl) {
+    		if(tl.field != null) {
+    			return;
+    		}
+
+    		var roles = [];
+    		tl.roles.forEach(function(tr) {
+    			roles.push(tr.seq);
+    		});
+    		roles = JSON.stringify(roles);
+    	
+			%> {
+			title: "<%=tl.title%>",
+			url: "<%-tl.url%>" + _obj._id,
+			roles: <%-roles%>,
+			type: "<%=tl.href? "href": "post"%>",<%
+
+			if(tl.params) { %>
+			params: [ "<%=tl.params.join("\",\"")%>" ]<%
+		
+			}%>
+		}, <%
+		
+    	});
+    	
+    %>	],
+ 
+ <%	} %>
+
+		sets: [
+<%
+		var tf_map = args.fieldIdMap;
+
+		args.det_sets.forEach(function(set) {
+%>		{
+			title: "<%=set.title%>",
+			fields: [		
+	<%	
+    		set.fields.forEach(function(field) {
+    			var f = tf_map[field.id];
+    %>	
+    			{ id: "<%=field.id%>", name: "<%=field.ui_name%>", 
+					 type: "<%=field.ui_type%>",   itype: "<%=field.ui_itype.addInfo.d%>" <%
+				if(field.ui_default) {
+				%>, default: "<%=field.ui._default%>"<%
+				} 
+				if(field._enum) {
+				%>, args: { enum: Enums.<%=field._enum.name%>	}<% 
+				}
+				if(field._ref) {
+				%>, args: { uri: "/opts/<%=field._ref.name%>" 	}<%
+				}
+				%>, required: <%=field._req%>
+       			},
+    <%		});	%>
+			] 
+		},
+	<%	});	%>
+	
+		],
+<%		
+		if(dj_sets != null && dj_sets.length > 0) {
+%>
+		tableForms: [
+<%
+		dj_sets.forEach(function(set) {
+			var id = set.id_field.id;
+%>		{
+			id: "<%=id%>",
+			title: "<%=set.title%>",
+			URI: "<%=uri%>/" + _obj._id  + "/<%=id%>",
+			jq: {
+				url: "/jqtable<%=uri%>/" + _obj._id  + "/<%=id%>",
+				cols: [
+<%
+			var jqfids = [];
+			set.jq_fields.forEach(function(field) {
+							
+				var isArr = field._isArray && "_arr" || "";
+			
+				jqfids.push(field.id);
+
+%>					{ "sTitle": "<%=field.ui_name%>", id: "<%=field.id%>" <%
+
+				if(field._enum) {
+					
+					%>, "mRender": JQF.enum<%=isArr%>(Enums.<%=field._enum.name%>)  <%
+					
+				} else if(field._ref) {
+					var tf = tf_map[field.id];
+					var sel = tf.ui_jq_pop_sel;
+					
+					if(tf.ref_enumFields) {
+					
+					%>,	"mRender": JQF.obj_enums(<%-JSON.stringify(sel)%>, <%-JSON.stringify(tf.ref_enumFields)%>) <%
+					
+					} else {
+					
+						var arrOrFields;
+						if(sel.length > 1) {
+							arrOrFields = "_fields";
+						} else {
+							arrOrFields = isArr;
+						}
+		
+						sel = JSON.stringify(sel) + ",";
+					
+					%>,	"mRender": JQF.obj<%=arrOrFields%>(<%-sel%> <%=field.ui_detlnk%>) <%
+					
+					}
+										
+				} else if(field.ui_itype.value == 4) {
+				
+					%>, "mRender": JQF.bool() <%
+				
+				} else if(field.ui_itype.value == 5) {
+					
+					%>, "mRender": JQF.image() <%
+					
+				} else if(field.ui_itype.value == 7) {
+					
+					%>, "mRender": JQF.date() <%
+					
+				}
+				
+%>				},
+
+<%			});	%>
+				]<%
+	       		
+	    if(args.tlinks) {
+	    	%>,
+	    	links: [<%
+	    	args.tlinks.forEach(function(tl) {
+	    		if(!tl.field || tl.field.id != id) {
+	    			return;
+	    		}
+
+	    		var roles = [];
+	    		tl.roles.forEach(function(tr) {
+	    			roles.push(tr.seq);
+	    		});
+	    		roles = JSON.stringify(roles);
+	    	
+				%> {
+				title: "<%=tl.title%>",
+				url: "<%-tl.url%>",
+				roles: <%-roles%>,
+				type: "<%=tl.href? "href": "post"%>",
+				args: (_obj && _obj._id)? ("obj=" + _obj._id): "" <%
+				
+			if(tl.params != null) {
+				%>,
+				params: [ "<%=tl.params.join("\",\"")%>" ]
+				
+			<% } %>
+				
+			}, <%
+			
+	    	});
+	    	
+	    %>	]
+	 
+	 <%	} %>		
+		
+		   	},
+		   	
+	       	manage: {
+	       		fields: [
+<%			
+			set.man_fields.forEach(function(field) {
+
+	    		var dataInd = jqfids.indexOf(field.id);
+	    		if(dataInd > -1) {
+	    			dataInd += 1;
+	    		}
+%>
+    			{ id: "<%=field.id%>", name: "<%=field.ui_name%>", 
+					 type: "<%=field.ui_type%>",   itype: "<%=field.ui_itype.addInfo.d%>" <%
+
+				if(field.ui_default) {
+				
+				%>, default: "<%=field.ui_default%>"<%
+				
+				} 
+				if(field._enum) {
+				
+				%>, args: { enum: Enums.<%=field._enum.name%>	}<% 
+				
+				}
+				if(field._ref) {
+				
+				%>, args: { uri: "/opts/<%=field._ref.name%>" 	}<%
+				
+				}
+				%>, dataInd: <%=dataInd%>, required: <%=field._req%>
+       			},
+<%			
+			});
+%>
+	       		]
+	       	}
+		},
+
+<%		
+		});
+%>			
+		]
+<%		
+		}
+%>	
+	};
+	
+	var _form = <%=formName%>Form;
+	
+	if(typeof(ExtInit) != "undefined") {
+		ExtInit(cfg, function() {
+			return _form.init(cfg);
+		});
+	} else {
+		_form.init(cfg);
+	}
+	
+});

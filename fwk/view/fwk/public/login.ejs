@@ -1,0 +1,41 @@
+
+<% include ./common/sheader %>
+
+<link type="text/css" rel="stylesheet" href="/common/css/login.css">
+<link type="text/css" rel="stylesheet" href="/common/css/inputs.css">
+
+<script src="/jquery/jquery-1.9.1.js"></script>
+<script src="/common/js/inputs.js"></script>
+<script src="/common/js/common.js"></script>
+<script src="/common/js/login.js"></script>
+
+<form id="loginform" action="/login" method="post">
+    <div class="row">
+        <div class="lbl">Email</div>
+        <div class="inp"><input type="text" id="email" name="email"></div>
+        <div class='clear'></div>
+    </div>
+    <div class="row">
+        <div class="lbl">Password</div>
+        <div class="inp"><input type="password" id="pwd" name="pwd"></div>
+        <div class='clear'></div>
+    </div>
+    <div class='rm-row'>
+        <div class="inp"><input type="checkbox"
+                id="rememberme" name="rememberme"> <label>Keep me signed In</label></div>
+        <div class='clear'></div>
+    </div>
+    <div class='err-msg err-col'>
+    	<%=error%>
+    </div>
+    <div class="row butt-row">
+        <span class="butt butt-def" id="submit" ><a href="javascript:void(0)">LOGIN</a></span>
+    </div>
+</form>
+<div class='fpwd-cntr' id="fpwd_cntr">
+	<div class="fpwd-lnk">
+    	<a href='javascript:void(0)' id="fpwd_butt">Forgot Password?</a>
+    </div>
+</div>
+
+<% include ./common/sfooter %>

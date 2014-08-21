@@ -1,0 +1,25 @@
+
+var Util = require("../../fwk/server/common/Util");
+
+module.exports = {
+	
+	getHome: function() {
+		return __dirname;
+	},
+
+	loadModels: function() {
+		Util.eachFile(__dirname + "/server", function(file) {
+			if(file.indexOf("/model.js") > -1) {
+				require(file);
+			}	
+		});
+	},
+	
+	addRoutes: function(app) {
+		Util.eachFile(__dirname + "/server", function(file) {
+			if(file.indexOf("/api.js") > -1) {
+				require(file)(app);
+			}	
+		});		
+	}
+};

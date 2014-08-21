@@ -1,0 +1,38 @@
+
+<script type="text/javascript">
+	var PAGE_TITLE = "<%=page_title%>";
+</script>
+
+<%include ../hdrs/new-form-hdr %>
+
+<link type="text/css" rel="stylesheet" href="/<%=pageid%>/css/new.css">
+
+<script src="/<%=pageid%>/js/new.js"></script>
+
+<% if(ext_script) {	%>
+<script src="<%=ext_script%>"></script>
+<%	}	%>
+
+<div class="new-cntr">
+
+<div class="manage content-manage" id="form_cntr">
+	<div class="manage-hdr">
+		<div class="manage-title" id="form_title"></div> 
+		<div class="clear"></div>
+	</div>
+	<div id="cnt_body" class="cnt-body">
+		<div class="manage-cnt" id="form_cnt">
+	
+		</div>
+		<div class="manage-err hide" id="form_err">
+			
+		</div>		
+		<div class="butt-cntr manage-butt">
+			<span class="butt butt-def" id="form_butt_submit" ><a href="javascript:void(0)">Submit </a></span>
+		</div>
+	</div>
+	
+</div>
+
+</div>
+
